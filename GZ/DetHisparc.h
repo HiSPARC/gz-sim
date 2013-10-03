@@ -1,26 +1,27 @@
 /*
- *  DetIceTop.h
+ *  DetHisparc.h
  *  GZ
  *
- *  Created by Sven Lafebre on 5-05-09.
- *  Copyright 2009 Pennsylvania State University. All rights reserved.
+ *  Created by Jeffrey Wouda and Bas de Gier on 22-05-2013.
+ *  Copyright 2007 __MyCompanyName__. All rights reserved.
  *
  */
 
-#ifndef __DETICETOP_H__
-#define __DETICETOP_H__ 1
+#ifndef __DETHISPARC_H__
+#define __DETHISPARC_H__ 1
 
 #include "Detector.h"
 
-class DetIceTop : public Detector {
-	double     _coreSize;
-	
+class DetHisparc : public Detector {
+	double _coreSize;
+
 	bool InCircle(const vector<double> &pos, const vector<double> &center, double radius) const;
-	
+
+
 public:
-	DetIceTop();
-	DetIceTop(int s);
-	
+	DetHisparc();
+	DetHisparc(int s);
+
 	bool   IsDetected(const std::vector<double> &r) const;
 	double TotalArea() const;
 	double AngularSensitivity(double zenith) const;
@@ -28,4 +29,4 @@ public:
 	
 };
 
-#endif // __DETICETOP_H__
+#endif // __DETHISPARC_H__

@@ -7,7 +7,7 @@
  *
  */
 
-#include "GZRunParameters.h"
+#include "/user/bdegier/hisparc/lafebre2/GZ/GZ/GZRunParameters.h"
 
 GZRunParameters::GZRunParameters() {
 

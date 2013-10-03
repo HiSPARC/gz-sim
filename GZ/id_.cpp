@@ -21,7 +21,7 @@
 #include "randomc.h"
 #include "GZRunParameters.h"
 #include "Hist2D.h"
-#include "DetIceTop.h"
+#include "DetHisparc.h"
 
 SigintHandler   TheSigintHandler;	// global sigint handler
 
@@ -127,12 +127,12 @@ int main (int argc, char** argv) {
 	SignalHandler::get_instance().register_handler(SIGINT, &TheSigintHandler);
 	
 	ifstream file_input;
-	string   working_dir = "/Volumes/Data/svenlafe/";
+	string   working_dir = "";
 	
-	string   file_input_name = working_dir+"GZ.out";
-	if (argc > 1) {
-		file_input_name = argv[1];
-	}
+	string   file_input_name = working_dir+"GZ_allruns.txt";
+//	if (argc > 1) {
+//		file_input_name = argv[1];
+//	}
 
 	cerr << "Reading file " << file_input_name.c_str() << "..." << endl;
 	
@@ -164,7 +164,7 @@ int main (int argc, char** argv) {
 							   AngularResolution/2+1, -pi/2., pi/2.*33./32.);
 	}
 
-	DetIceTop detector(0);
+	DetHisparc detector(0);
 	int line = 0;
 	while (GetParametersFromFile(&file_input, &dist, &par)) {
 		line ++;
@@ -174,8 +174,11 @@ int main (int argc, char** argv) {
 
 		double d = sqrt(dist*dist);
 		double p = par.Probability() * MaxDistance
-				  *(GalacticFlux(par.Charge(), par.Energy()) + ExtragalacticFlux(par.Charge(), par.Energy()))
-				;
+				*GalacticFlux(par.Charge(), par.Energy()) /* / TotalFlux(par.Energy()) + ExtragalacticFlux(par.Charge(), par.Energy())*/;
+
+		double r = 0.00952171*pow(0.700158,(15.9964-(2.57536*log10( par.Energy()*(par.Mass()-1)/par.Mass() ))));
+
+		double e_proneu = par.Energy()/par.Mass();
 
 		double p_limit     = p;
 		double p_perfect   = p;
@@ -183,23 +186,27 @@ int main (int argc, char** argv) {
 		double p_2ndstrict = p;
 
 #define DO_DETECTOR
+
 //		---------------------- Cut from here for detector-independent case
 #ifdef  DO_DETECTOR
-		double effarea     = detector.EffectiveArea(par.Zenith(), par.Azimuth(), dist);
+		double effarea     = detector.EffectiveArea(par.Zenith(), par.Azimuth(), dist, r , e_proneu);
 
-		p_limit     = p*detector.TotalArea();
-		p_perfect   = p*effarea;
+		p_limit     = p*(95.*pi*r*r);
+		p_perfect   = p*effarea*(95.*pi*r*r);
+cout<<effarea<<endl;
+
 		p_2ndcheap  = p
-					 *effarea
+					 *effarea*(95.*pi*r*r)
 					 *detector.EnergyEfficiency(10.*par.Energy()/double(par.Mass()))
 					 *detector.EnergyEfficiency(par.Energy()*double(par.Mass()-1.)/double(par.Mass()))
 				   ;
 		p_2ndstrict = p
-					 *effarea
+					 *effarea*(95.*pi*r*r)
 					 *detector.EnergyEfficiency(par.Energy()/double(par.Mass()))
 				   ;
 //		---------------------- Cut up to here
 #endif
+
 
 		// Add event to probability skymap
 		skymap_prob[0]
@@ -271,15 +278,17 @@ int main (int argc, char** argv) {
 				event_rate_perfect  .AddBin(j, i, event_rate_perfect  .GetBinValue(j, i+1));
 				event_rate_2ndcheap .AddBin(j, i, event_rate_2ndcheap .GetBinValue(j, i+1));
 				event_rate_2ndstrict.AddBin(j, i, event_rate_2ndstrict.GetBinValue(j, i+1));
-			} else {
-				event_rate_limit    .AddBin(j, i, 1.785*event_rate_limit    .GetBinValue(j, i));
-				event_rate_perfect  .AddBin(j, i, 1.785*event_rate_perfect  .GetBinValue(j, i));
-				event_rate_2ndcheap .AddBin(j, i, 1.785*event_rate_2ndcheap .GetBinValue(j, i));
-				event_rate_2ndstrict.AddBin(j, i, 1.785*event_rate_2ndstrict.GetBinValue(j, i));
+		} else {
+			//	event_rate_limit    .AddBin(j, i, 1.785*event_rate_limit    .GetBinValue(j, i));
+			//	event_rate_perfect  .AddBin(j, i, 1.785*event_rate_perfect  .GetBinValue(j, i));
+			//	event_rate_2ndcheap .AddBin(j, i, 1.785*event_rate_2ndcheap .GetBinValue(j, i));
+			//	event_rate_2ndstrict.AddBin(j, i, 1.785*event_rate_2ndstrict.GetBinValue(j, i));
 			}
 		}
 	}
-	cout << "Final event rate: " << 18043684627.1364*event_rate_2ndstrict.GetBinAverage(0,0) << endl;
+	//cout << "Final event rate: " << 18043684627.1364*event_rate_2ndstrict.GetBinAverage(0,0) << endl;
+	cout << "Final event rate (per year): " << 31556926.*event_rate_2ndstrict.GetBinAverage(0,0) << endl;
+
 #endif
 	
 	// Write disintegration probability skymap to file

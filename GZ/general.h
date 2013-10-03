@@ -95,7 +95,10 @@ double ZenithFunc(double x);
 /// \return	Flux in particles per square meter per second per electronvolt
 double GalacticFlux(int Z, double E);
 
-double ExtragalacticFlux(int Z, double E);
+double TotalFlux(double E);
+
+
+/*double ExtragalacticFlux(int Z, double E);*/
 
 int ChargeToMass(int Z);
 

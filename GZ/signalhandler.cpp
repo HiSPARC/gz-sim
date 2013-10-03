@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "signalhandler.h"
+#include "/user/bdegier/hisparc/lafebre2/GZ/GZ/signalhandler.h"
 
 // initialization of static data members --- see http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.9
 EventHandler* SignalHandler::signal_handlers[NSIG];

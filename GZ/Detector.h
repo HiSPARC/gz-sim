@@ -55,10 +55,10 @@ public:
 	/// \param	delta	Two-element vector containing the EW and NS separation
 	///					of the GZ elements.
 	/// \return	The effective area for the configuration in square kilometers
-	double EffectiveArea(double theta, double phi, std::vector<double> delta);
+	double EffectiveArea(double theta, double phi, std::vector<double> delta, double r, double e_proneu);
 	
 	/// \brief	Returns the probability of detection of the second GZ event
-	double SecondDetectionProbability(const std::vector<double> &dist);
+	double SecondDetectionProbability(const std::vector<double> &dist, double r , double e_proneu);
 	
 	/// \brief	Calculate the angular sensitivity given the zenith angle of a GZ event
 	///
@@ -71,6 +71,8 @@ public:
 	/// \param	energy	Energy of an incoming GZ remnant
 	/// \return	The relative efficiency of the detector
 	virtual double EnergyEfficiency(double energy) const { return 0; }
+
+	bool InCircle(const vector<double> &pos, const vector<double> &center, double radius) const;
 
 };
 

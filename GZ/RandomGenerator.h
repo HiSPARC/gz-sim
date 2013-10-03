@@ -7,7 +7,7 @@
  *
  */
 
-#include <randomc.h>
+#include </user/bdegier/hisparc/lafebre2/GZ/GZ/randomc.h>
 
 double RandomUniform();
 

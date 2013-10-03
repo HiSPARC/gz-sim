@@ -15,7 +15,7 @@
 *  cannot be used for gambling applications.                                 *
 *****************************************************************************/
 
-#include "randomc.h"
+#include "/user/bdegier/hisparc/lafebre2/GZ/GZ/randomc.h"
 
 void CRandomMersenne::Init0(uint32 seed) {
    // Detect computer architecture

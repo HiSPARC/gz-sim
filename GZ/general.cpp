@@ -7,7 +7,7 @@
  *
  */
 
-#include <general.h>
+#include </user/bdegier/hisparc/lafebre2/GZ/GZ/general.h>
 
 using namespace std;
 
@@ -25,9 +25,18 @@ double GalacticFlux(int Z, double E) {
 	return J0[Z]/1.e12 * pow(E,-gammaZ[Z]) * pow(1. + pow(E/(4.49e3*(double)Z),1.9),-1.1);
 }
 
-double ExtragalacticFlux(int Z, double E) {
-	return 0.;
+double TotalFlux(double E) {
+	double TF = 0.; 
+        for (int i = 2; i < 93; i ++) {
+	TF += GalacticFlux (i, E);
+        }
+
+	return TF;
 }
+
+/*double ExtragalacticFlux(int Z, double E) {
+	return 0.;
+}*/
 
 int ChargeToMass(int Z) {
 
