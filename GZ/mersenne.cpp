@@ -10,12 +10,12 @@
 *                                                                            *
 *  Experts consider this an excellent random number generator.               *
 *                                                                            *
-*  � 2001 - 2007 A. Fog. Published under the GNU General Public License      *
+*  © 2001 - 2007 A. Fog. Published under the GNU General Public License      *
 *  (www.gnu.org/copyleft/gpl.html) with the further restriction that it      *
 *  cannot be used for gambling applications.                                 *
 *****************************************************************************/
 
-#include "/user/bdegier/hisparc/lafebre2/GZ/GZ/randomc.h"
+#include "randomc.h"
 
 void CRandomMersenne::Init0(uint32 seed) {
    // Detect computer architecture

@@ -15,4 +15,4 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "/user/bdegier/hisparc/lafebre2/GZ/GZ/eventhandler.h"
+#include "eventhandler.h"

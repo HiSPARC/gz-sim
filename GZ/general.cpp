@@ -7,7 +7,7 @@
  *
  */
 
-#include </user/bdegier/hisparc/lafebre2/GZ/GZ/general.h>
+#include "general.h"
 
 using namespace std;
 

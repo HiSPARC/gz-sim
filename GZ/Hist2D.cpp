@@ -7,7 +7,7 @@
  *
  */
 
-#include "/user/bdegier/hisparc/lafebre2/GZ/GZ/Hist2D.h"
+#include "Hist2D.h"
 
 using namespace std;
 

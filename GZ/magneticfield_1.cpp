@@ -1,9 +1,9 @@
-#include </user/bdegier/hisparc/lafebre/GZ_magnetic/general.h>
-#include </user/bdegier/hisparc/lafebre/GZ_magnetic/randomc.h>
-#include </user/bdegier/hisparc/lafebre/GZ_magnetic/GZRunParameters.h>
+#include <general.h>
+#include <randomc.h>
+#include <GZRunParameters.h>
 
 CRandomMersenne TheGenerator(0);	// make instance of random number generator
-#include "/user/bdegier/hisparc/lafebre/GZ_magnetic/RandomGenerator.h"
+#include "RandomGenerator.h"
 
 using namespace std;
 

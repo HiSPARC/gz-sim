@@ -15,5 +15,5 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "/user/bdegier/hisparc/lafebre2/GZ/GZ/siginthandler.h"
+#include "siginthandler.h"
 

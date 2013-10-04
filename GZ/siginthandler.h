@@ -10,7 +10,7 @@
 #ifndef SIGINTHANDLER_H
 #define SIGINTHANDLER_H
 
-#include "/user/bdegier/hisparc/lafebre2/GZ/GZ/eventhandler.h"
+#include "eventhandler.h"
 #include <signal.h>
 
 // see http://www.cs.wustl.edu/~schmidt/signal-patterns.html and http://fara.cs.uni-potsdam.de/~kaufmann/?page=GenCppFaqs&faq=Singleton
