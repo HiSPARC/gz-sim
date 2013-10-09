@@ -3,7 +3,6 @@
  *  GZ
  *
  *  Created by Jeffrey Wouda and Bas de Gier on 13-05-2013.
- *  Copyright 2007 __MyCompanyName__. All rights reserved.
  *
  */
 
